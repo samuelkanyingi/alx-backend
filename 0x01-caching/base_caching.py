@@ -3,7 +3,6 @@
 """
 
 
-from base_caching import BaseCaching
 class BaseCaching():
     """ BaseCaching defines:
       - constants of your caching system
