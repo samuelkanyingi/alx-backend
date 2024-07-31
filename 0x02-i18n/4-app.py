@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Flask app with Babel integration for i18n and locale selection.
+Flask app with Babel integration for i18n and translations.
 """
 
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, _
 
 
 class Config:
@@ -26,10 +26,15 @@ babel = Babel(app)
 def get_locale() -> str:
     """
     Determine the best match for supported languages based on the request.
+    If a locale parameter is present in the request its value is a supported
+    locale, use it; otherwise, use the default behavior.
 
     Returns:
         str: The best match language.
     """
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
@@ -37,8 +42,11 @@ def get_locale() -> str:
 def index() -> str:
     """
     Render the index.html template.
+
+    Returns:
+        str: Rendered HTML content of the index template.
     """
-    return render_template('2-index.html')
+    return render_template('4-index.html')
 
 
 if __name__ == '__main__':
