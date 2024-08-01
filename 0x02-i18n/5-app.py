@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""
-Flask app with Babel integration for i18n and translations.
-"""
+''' Flask app with Babel integration '''
 
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
 from typing import Optional, Dict
+
 
 class Config:
     """
@@ -14,6 +13,7 @@ class Config:
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
